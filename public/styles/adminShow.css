@@ -1,0 +1,81 @@
+.navi_admin {
+    display: flex;
+    width: 100vw;
+    /* min-width: 600px; */
+    height: 80px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    justify-content: space-between;
+}
+
+.icon_notece {
+    color: #fd7e14;
+    text-align: center;
+    padding: 20px 20px;
+    font-size: 25px;
+}
+
+.name_Admin {
+    font-size: 25px;
+}
+
+.list_management {
+    align-items: center;
+    padding: 10px 0px;
+}
+
+.navi_management {
+    padding: 10px 0px;
+    background-color: #f1a71ed5;
+    min-height: 100vh;
+    min-width: 240px;
+}
+
+.management {
+    color: white;
+    font-size: 22px;
+    min-width: 240px;
+    background-color: #f1a71ed5;
+    border-bottom: 1px solid white;
+}
+
+.a_managrement {
+    text-decoration: none;
+    color: white;
+}
+
+.list_a {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+    text-align: center;
+}
+
+.list_product {
+    height: 45px;
+    background-color: #fdfdfd;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+}
+
+.container_body {
+    overflow-x: hidden;
+}
+
+.delete_modal {
+    width: 60px;
+    height: 39px;
+    background-color: red;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(108, 117, 125);
+}
+
+.stylebutton {
+    background-color: red;
+    width: 120px;
+    height: 50px;
+    color: white;
+    border: none;
+    border-radius: 3px;
+}

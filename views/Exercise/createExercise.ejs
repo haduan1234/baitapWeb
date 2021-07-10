@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/styles/adminShow.css">
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/showProduct.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product management</title>
+</head>
+
+<body>
+    <div class="container-fluid container_body">
+        <div class="">
+            <div class="navi_admin pe-5">
+                <div class="management p-2 d-flex align-items-center">
+                    Exercise management
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="p-2">
+                        <i class="fas fa-flag icon_notece"></i>
+                    </div>
+                    <div class="avata_Admin ">
+                        <img src="/images/download.png" alt="anh" width="65px" height="65px" style=" border: 1px solid rgba(100, 100, 111, 0.2); box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; border-radius: 100%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex">
+            <div class="navi_management">
+
+                <div class="list_management">
+                    <div class="p-1 list_a">
+                        <a href="/product/show" style="text-decoration: none; color: white; font-size: 19px;">
+                        Exercise List
+                    </a>
+
+                    </div>
+                    <div class=" p-1 list_a">
+                        <a href="/product/showCircle" style="text-decoration: none; color: white; font-size: 19px;">
+                     Exercise delivered
+                    </a>
+                    </div>
+                </div>
+            </div>
+            <div style="flex-grow: 1;" class=" p-3">
+                <form action="/product/create" method="post" enctype="multipart/form-data">
+                    <div class="row pb-2">
+                        <div class="col-md-6 col-sm-12">
+                            <% if(typeof exercise !=="undefined" ) { %>
+                                <input type="hidden" value="<%= exercise.id%>" name="id">
+                                <% }  %>
+                                    <div for="exampleFormControlFile1 d-block">Tên bài tập </div>
+                                    <% if(typeof exercise !=="undefined" ) { %>
+                                        <input class="form-control form-control-lg" name="exercise_name" type="text" placeholder=".Exercise_name" value="<%= exercise.exercise_name %>" aria-label=".form-control-lg example">
+                                        <% } else { %>
+                                            <input class="form-control form-control-lg" name="exercise_name" type="text" placeholder=".Exercise_name" aria-label=".form-control-lg example">
+                                            <% } %>
+
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div for="exampleFormControlFile1 d-block">Chi tiết bài tập </div>
+                            <% if(typeof exercise !=="undefined" ) { %>
+                                <input class="form-control form-control-lg" name="exercise_detail" type="text" value="<%= exercise.exercise_detail %>" placeholder=".Exercise_detail" aria-label="default input example">
+                                <% } else { %>
+                                    <input class="form-control form-control-lg" name="exercise_detail" type="text" placeholder=".Exercise_detail" aria-label="default input example">
+                                    <% } %>
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-md-6 col-sm-12">
+                            <div for="exampleFormControlFile1 d-block">Giáo viên hướng dẫn</div>
+                            <% if(typeof  exercise !=="undefined" ) { %>
+                                <input class="form-control form-control-lg" name="tutorial_teacher" type="text" placeholder=".Tutorial_teacher" value="<%=  exercise.tutorial_teacher %>" aria-label=".form-control-lg example">
+                                <% } else { %>
+                                    <input class="form-control form-control-lg" name="tutorial_teacher" type="text" placeholder="Tutorial_teacher" aria-label=".form-control-lg example">
+                                    <% } %>
+
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div for="exampleFormControlFile1 d-block">Sinh viên thực hiện </div>
+                            <% if(typeof  exercise !=="undefined" ) { %>
+                                <input class="form-control form-control-lg" name="student_porform" type="text" value="<%=  exercise.student_porform %>" placeholder=".Student_porform" aria-label="default input example">
+                                <% } else { %>
+                                    <input class="form-control form-control-lg" name="student_porform" type="text" placeholder=".Student_porform" aria-label="default input example">
+                                    <% } %>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 col-sm-12 mt-3 ">
+                        <div class="form-group">
+                            <div for="exampleFormControlFile1 d-block">File</div>
+                            <% if(typeof exercise !=="undefined" ) { %>
+                                <input type="file" name="file_demo" id="exampleFormControlFile1">
+                                <% } else { %>
+                                    <input type="file" class="form-control-file" name="file_demo" id="exampleFormControlFile1">
+                                    <% } %>
+                                        <div class="mt-3">
+                                            <button type="submit" class="stylebutton mt-3">CREATE</button>
+                                        </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        </from>
+    </div>
+    </div>
+
+
+    </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<script>
+</script>
+
+</html>

@@ -1,0 +1,125 @@
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   Bài 1.  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
++) Định nghĩa:
+ EIGRP – Enhance Interio Gateway Routing Protocol là giao thức định tuyến mở rộng của IGRP,
+IGRP là giao thức dạng Classfull, còn EIGRP là giao thức dạng Classless, nghĩa là có mang theo subnetmask 
+trong các lần cập nhật EIGRP là giao thức định tuyến lai (Hybrid Routing), là sự kết hợp của Distance Vector và Link States. 
+EIGRP là một giao thức định tuyến theo vector khoảng cách nâng cao nhưng khi cập nhật và bảo trì 
+thông tin láng giềng và thông tin định tuyến thì nó làm việc giống như một giao thức định tuyến theo trạng thái đường liên kết
+
++) Đặc điểm.
+- Nguyên lý hoạt động
+
+EIGRP Router lưu giữ các thông tin về đường đi và cấu trúc mạng trên RAM, nhờ đó chúng đáp ứng nhanh chóng theo sự thay đổi. 
+Giống như OSPF, EIGRP cũng lưu những thông tin này thành từng bảng và từng cơ sở dữ liệu khác nhau. EIGRP lưu các con đường 
+mà nó học được theo một cách đặc biệt. Mỗi con đường có trạng thái riêng và có đánh dấu để cung cấp thêm nhiều thông tin hữu 
+dụng khác.
+
+- Một số ưu điểm của EIGRP so với các giao thức định tuyến véc tơ khoảng cách
+Khả năng hội tụ nhanh
+Bảo tồn băng thông và sử dụng băng thông một cách hiệu quả:
+Hỗ trợ VLSM
+Hỗ trợ IP, IPX, Apple talk
+Chạy trực tiếp trên IP và protocol number là 88
+Load balancing trên tất cả các cost không bằng nhau
+Hỗ trợ tất cả các giao thức và cấu trúc dữ liệu ở layer 2
+Không dùng broadcast và dùng Multicast hoặc Unicast trong từng trường hợp cụ thể
+Hỗ trợ việc chứng thực
+Manual Summary trên bất kỳ interface nào
+
++) Nhược điểm: 
+ EIGRP là một giao thức với rất nhiều ưu điểm và có thể được sử dụng trong những mô hình mạng vừa và lớn tuy nhiên vì đây
+là giao thức độc quyền của Cisco nên nó chỉ chạy trên thiết bị của cisco, trong khi đó không phải một tổ chức nào cũng 
+có thể dùng toàn đồ Cisco mà còn các dòng sản phẩm khác nữa. Chính vì vậy, đây là một bất lợi của giao thức định tuyến EIGRP.
+
++) EIGRP sử dụng các bảng sau để lưu trữ thông tin:
+bảng định tuyến
+
+ -Ngoài bảng định tuyến thì còn sử dụng .
+Bảng láng giềng
+Bảng cấu trúc liên kết
+
+(*) Tại sao EIGRP là giao thức lai
+Thông tin trong bảng cấu trúc liên kết có thể được chèn vào bảng định tuyến của bộ định tuyến và sau đó có thể được sử dụng để
+chuyển tiếp lưu lượng. Nếu mạng thay đổi (ví dụ: liên kết vật lý không thành công hoặc bị ngắt kết nối), đường dẫn sẽ không khả 
+dụng. EIGRP được thiết kế để phát hiện những thay đổi này và sẽ cố gắng tìm một con đường mới đến đích. Đường dẫn cũ không còn nữa
+sẽ bị xóa khỏi bảng định tuyến. Không giống như hầu hết các giao thức định tuyến vectơ khoảng cách, EIGRP không truyền tất cả dữ 
+liệu trong bảng định tuyến của bộ định tuyếnkhi một thay đổi được thực hiện, nhưng sẽ chỉ truyền những thay đổi đã được thực hiện
+kể từ khi bảng định tuyến được cập nhật lần cuối. EIGRP không gửi bảng định tuyến của nó theo định kỳ, nhưng sẽ chỉ gửi dữ liệu 
+bảng định tuyến khi một thay đổi thực sự đã xảy ra. Hành vi này phù hợp hơn với các giao thức định tuyến trạng thái liên kết ,
+do đó EIGRP chủ yếu được coi là một giao thức lai.
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   Bài 2.  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+(DUAL FSM)tên đầy đủ của thuật toán là máy trạng thái hữu hạn kép .EIGRP chịu trách nhiệm về việc định tuyến trong một hệ thống tự trị
+và DUAL phản hồi các thay đổi trong cấu trúc liên kết định tuyến và tự động điều chỉnh các bảng định tuyến của bộ định tuyến ()
+
++) Nguên lý hoạt động
+
+DUAL sử dụng ba bảng riêng biệt để tính toán tuyến đường. Các bảng này được tạo bằng cách sử dụng thông tin trao đổi giữa các bộ định tuyến EIGRP.
+Thông tin khác với thông tin được trao đổi bởi các giao thức định tuyến trạng thái liên kết .Trong EIGRP, thông tin được trao đổi bao gồm các tuyến
+đường, " số liệu " hoặc chi phí của mỗi tuyến đường và thông tin cần thiết để hình thành mối quan hệ láng giềng (chẳng hạn như số AS, bộ định thời và giá trị K).
+
+Ba bảng này tại r ba bảng lưu trữ của EIGRP.
+
+Ba bảng và chức năng của chúng chi tiết như sau:
+
+* Bảng láng giềng chứa thông tin về tất cả các bộ định tuyến được kết nối trực tiếp khác. Một bảng riêng biệt tồn tại cho từng giao thức được hỗ trợ (IP, IPX, v.v.).
+Mỗi mục nhập tương ứng với một hàng xóm với mô tả về giao diện mạng và địa chỉ. Ngoài ra, một bộ đếm thời gian được khởi tạo để kích hoạt phát hiện định kỳ xem 
+kết nối có còn hoạt động hay không. Điều này đạt được thông qua các gói "Xin chào" . Nếu gói "Xin chào" không được nhận từ một người hàng xóm trong một khoảng 
+thời gian xác định, bộ định tuyến sẽ bị lỗi và bị xóa khỏi bảng hàng xóm.
+
+* Bảng cấu trúc liên kết chứa số liệu (thông tin chi phí) của tất cả các tuyến đường đến bất kỳ điểm đến nào trong hệ thống tự trị. Thông tin này được nhận từ 
+các bộ định tuyến lân cận có trong bảng Neighbor. Các tuyến chính (kế thừa) và phụ (kế thừa khả thi) đến một đích sẽ được xác định với thông tin trong bảng 
+cấu trúc liên kết. Trong số những thứ khác, mỗi mục nhập trong bảng cấu trúc liên kết chứa những điều sau:
+"FD (Khoảng cách khả thi)": Chỉ số được tính toán của tuyến đường đến điểm đến trong hệ thống tự hành.
+"RD (Khoảng cách được Báo cáo)": Chỉ số đến đích như được quảng cáo bởi một bộ định tuyến lân cận. RD được sử dụng để tính toán FD và xác định xem tuyến đường 
+có đáp ứng "điều kiện khả thi" hay không.
+Trạng thái tuyến đường : Tuyến đường được đánh dấu là "hoạt động" hoặc "bị động". Các tuyến đường "thụ động" ổn định và có thể được sử dụng để truyền dữ liệu.
+Các tuyến đường "đang hoạt động" đang được tính toán lại và / hoặc không khả dụng.
+
+* Bảng định tuyến chứa (các) tuyến đường tốt nhất đến điểm đến (xét về "số liệu" thấp nhất). Các tuyến này là các tuyến kế thừa từ bảng cấu trúc liên kết.
+DUAL đánh giá dữ liệu nhận được từ các bộ định tuyến khác trong bảng cấu trúc liên kết và tính toán các tuyến chính (kế thừa) và phụ (kế thừa khả thi).
+Đường dẫn chính thường là đường dẫn có chỉ số thấp nhất để đến đích và đường dẫn dự phòng là đường dẫn có chi phí thấp thứ hai (nếu nó đáp ứng điều kiện khả thi).
+Có thể có nhiều người kế nhiệm và nhiều người kế nhiệm khả thi. Cả phần kế tiếp và phần kế tiếp khả thi đều được duy trì trong bảng cấu trúc liên kết, nhưng chỉ
+những phần kế tiếp được thêm vào bảng định tuyến và được sử dụng để định tuyến các gói.
+
+Để một tuyến trở thành một tuyến kế thừa khả thi, RD của nó phải nhỏ hơn FD của tuyến kế thừa. Nếu điều kiện khả thi này được đáp ứng, không có cách nào mà 
+việc thêm tuyến đường này vào bảng định tuyến có thể gây ra một vòng lặp.
+
+Nếu tất cả các tuyến kế tiếp đến một đích không thành công, thì tuyến kế thừa khả thi sẽ trở thành tuyến kế thừa và ngay lập tức được thêm vào bảng định tuyến.
+Nếu không có bảng kế thừa khả thi nào trong bảng cấu trúc liên kết, một quá trình truy vấn được bắt đầu để tìm kiếm một tuyến mới.
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   Bài 3.  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+topology table được sử dụng bởi các bộ định tuyến để định tuyến lưu lượng truy cập trong mạng. Nó bao gồm tất cả các bảng định tuyến bên trong 
+Hệ thống tự trị nơi đặt bộ định tuyến. Sau đó, mỗi bộ định tuyến sử dụng giao thức định tuyến EIGRP duy trì một bảng cấu trúc liên kết cho mỗi giao thức
+mạng được cấu hình - tất cả các tuyến đường đã học, dẫn đến đích đều được tìm thấy trong topology table. EIGRP phải có kết nối đáng tin cậy.
+Bảng định tuyến của tất cả các bộ định tuyến của Hệ thống tự trị là giống nhau.
+
++) Khái niêm Successor.
+Router EIGRP có bảng định tuyến riêng cho từng giao thức mạng khác nhau. Con đường được chọn làm đường chính đến mạng đích gọi là successor. 
+Từ thông tin trong bảng láng giềng và bảng cấu trúc mạng, DUAL chọn ra một đường chính và đưa lên mạng định tuyến. Đến một mạng đích có thể
+có đến 4 successor. Những đường này có chi phí bằng nhau hoặc không bằng nhau.
+
++) Feasible successor 
+
+Đường Feasible successor (FS) là đường dự phòng cho đường successor. Đường này cũng được chọn ra cùng với đường successor nhưng chúng chỉ 
+được lưu trong bảng cấu trúc mạng nhưng điều này không bắt buộc. Router xem hop kế tiếp của đường Feasible successor dưới nó gần mạng đích 
+hơn nó. Do đó, chi phí của Feasbile successor được tính bằng chi phí của chính nó cộng với chi phí vào Router láng giềng thông báo qua.
+
++) Feasible distance
+
+(FD) – the local router’s metric of the best route to reach a specific network. The metric is calculated using the metric reported by the
+neighbor (the advertised distance) plus the metric to the neighbor reporting the route. The route with the lowest FD will be 
+laced in the routing table.
+
++) Feasibility Condition
+
+Điều kiện khả thi nêu rõ rằng một tuyến đường sẽ không được chấp nhận nếu Khoảng cách được báo cáo lớn hơn Khoảng cách khả thi của con đường tốt nhất .
+
+Hay nói một cách khác và từ quan điểm của bộ định tuyến: một đường dẫn đến một mạng sẽ không được chấp nhận nếu chi phí của hàng xóm của tôi nhiều hơn
+chi phí của tôi .
+
++) 
+
+
